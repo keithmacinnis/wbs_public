@@ -7,10 +7,17 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="ascii-container">
-        <pre id="ascii-text">-</pre>
+    <div id="terminal">
+        <pre id="ascii-text"></pre>
+        <div id="input-container" style="display: none;">
+            <div id="prompt">How can we help you?</div>
+            <input id="user-input" type="text" autofocus>
+            <span id="cursor">_</span>
+        </div>
     </div>
+    <ul id="suggestions"></ul>
 
+    <script src="texts.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
