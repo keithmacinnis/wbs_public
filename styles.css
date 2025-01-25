@@ -1,0 +1,50 @@
+body {
+  background-color: black;
+  color: #00FF00; /* Green for that old-school terminal feel */
+  font-family: 'Courier New', Courier, monospace;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#ascii-container {
+  /* No rotation needed for straight text */
+}
+
+#ascii-text {
+  opacity: 1; 
+  font-size: 18px;
+  line-height: 1.2;
+  white-space: pre;
+  text-align: left;
+  overflow: auto;
+  max-height: 90vh;
+  max-width: 90vw;
+}
+
+/* For mystic effect */
+body::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+      45deg,
+      rgba(0, 255, 0, 0.1),
+      rgba(0, 255, 0, 0.1) 10px,
+      transparent 10px,
+      transparent 20px
+  );
+  z-index: -1;
+  animation: mysticGlow 10s infinite alternate;
+}
+
+@keyframes mysticGlow {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
