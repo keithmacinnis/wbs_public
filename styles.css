@@ -1,6 +1,6 @@
 body {
   background-color: black;
-  color: #00FF00; /* Green for that old-school terminal feel */
+  color: #00FF00;
   font-family: 'Courier New', Courier, monospace;
   margin: 0;
   padding: 0;
@@ -14,25 +14,27 @@ body {
   display: flex;
   flex-direction: column;
   position: relative;
-  overflow-y: auto; /* Enable vertical scrolling for content */
+  overflow-y: auto;
+  padding-bottom: 30px; /* Space for input at the bottom for desktop */
 }
 
 #ascii-text {
   flex: 1;
   white-space: pre-wrap;
-  overflow-y: auto; /* Allow text to scroll within its container */
+  overflow-y: auto;
   margin: 0;
 }
 
 #input-container {
   display: flex;
   align-items: center;
-  height: 30px; /* Reserve space for input */
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  background: rgba(0, 0, 0, 0.7); /* Semi-transparent background for input area */
-  z-index: 1; /* Ensure input is above the scrolling content */
+  height: 30px;
+  position: fixed;
+  bottom: 0; /* Default to bottom for desktop */
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
 }
 
 #prompt {
@@ -44,15 +46,26 @@ body {
   border: none;
   color: #00FF00;
   font-family: 'Courier New', Courier, monospace;
-  width: calc(100% - 60px); /* Adjust width to account for prompt */
-  outline: none; /* Remove the default focus outline */
-  flex: 1; /* Allow input to grow/shrink within its container */
+  width: calc(100% - 60px);
+  outline: none;
+  flex: 1;
+}
+
+@media (max-width: 768px) {
+  #terminal {
+    padding-top: 30px; /* Space for input at the top for mobile */
+    padding-bottom: 0; /* No padding at bottom for mobile */
+  }
+  #input-container {
+    top: 0; /* Move input to top on mobile */
+    bottom: auto; /* Reset bottom positioning */
+  }
 }
 
 /* For mystic effect */
 body::after {
   content: '';
-  position: fixed; /* Fixed to cover the entire viewport */
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;

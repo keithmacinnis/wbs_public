@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const inputContainer = document.getElementById('input-container');
 
   let i = 0;
-  let revealText = '';  
+  let revealText = '';
   let currentText = suggestionText["Home"](isMobile());
 
   function updateText() {
@@ -15,6 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
       if (i >= currentText.split('\n').length) {
         inputContainer.style.display = 'flex';
         userInput.focus();
+        // Scroll text to bottom
+        text.scrollTop = text.scrollHeight;
       } else {
         setTimeout(updateText, 50);
       }
@@ -46,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function handleEnter(e) {
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' || e.keyCode === 13) {
       e.preventDefault();
       const actualInput = userInput.value.slice(0, userInput.selectionStart);
       const match = Object.keys(suggestionText).find(item => 
@@ -59,10 +61,13 @@ document.addEventListener('DOMContentLoaded', () => {
         revealText = '';
         currentText = suggestionText[match](isMobile());
         text.textContent = '';
-        inputContainer.style.display = 'none';
+        // Keep input hidden until text is fully revealed
         updateText();
       } else {
         text.textContent += `\nNo match found for: "${actualInput}"`;
+        // Show input immediately if no match
+        inputContainer.style.display = 'flex';
+        userInput.focus();
       }
       userInput.value = '';
       userInput.style.color = '#00FF00';
@@ -80,7 +85,11 @@ document.addEventListener('DOMContentLoaded', () => {
   updateText();
 
   window.addEventListener('resize', () => {
-    currentText = suggestionText["Home"](isMobile());
+    if (isMobile()) {
+      currentText = suggestionText["Home"](true);
+    } else {
+      currentText = suggestionText["Home"](false);
+    }
     i = 0;
     revealText = '';
     text.textContent = '';
@@ -94,6 +103,15 @@ document.addEventListener('DOMContentLoaded', () => {
   document.body.addEventListener('click', () => {
     if (inputContainer.style.display === 'flex') {
       userInput.focus();
+    }
+  });
+
+  // Prevent scrolling when keyboard appears
+  window.addEventListener('resize', () => {
+    if (window.innerHeight < 500) { // Rough estimate for keyboard being open
+      document.body.style.height = `${window.innerHeight}px`;
+    } else {
+      document.body.style.height = '100vh';
     }
   });
 });
