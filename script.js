@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let i = 0;
   let revealText = '';  
-  let currentText = window.innerWidth <= 768 ? mobileText : fullText; // Mobile detection based on screen width
+  let currentText = suggestionText["Home"](isMobile()); // Use the new function format
 
   function updateText() {
       if (i < currentText.split('\n').length) {
@@ -23,18 +23,20 @@ document.addEventListener('DOMContentLoaded', () => {
       }
   }
 
+  function isMobile() {
+      return window.innerWidth <= 768;
+  }
+
   updateText();
 
   // Handle screen resize
   window.addEventListener('resize', () => {
-    let newText = window.innerWidth <= 768 ? mobileText : fullText;
-    if (newText !== currentText) {
-      currentText = newText;
-      i = 0;
-      revealText = '';
-      text.textContent = '';
-      updateText();
-    }
+    // Re-fetch currentText with the new screen size
+    currentText = suggestionText["Home"](isMobile());
+    i = 0;
+    revealText = '';
+    text.textContent = '';
+    updateText();
   });
 
   const suggestionList = Object.keys(suggestionText);
@@ -46,10 +48,17 @@ document.addEventListener('DOMContentLoaded', () => {
       suggestions.innerHTML = '';
       suggestionList.forEach(item => {
         const li = document.createElement('li');
-        li.textContent = item;
+        const highlighted = item.replace(new RegExp(this.value, 'gi'), match => `<span style="background-color: rgba(0, 255, 0, 0.3);">${match}</span>`);
+        li.innerHTML = highlighted;
         li.addEventListener('click', () => {
           this.value = item;
           suggestions.style.display = 'none';
+          i = 0;
+          revealText = '';
+          currentText = suggestionText[item](isMobile()); // Use the function call with isMobile()
+          text.textContent = '';
+          inputContainer.style.display = 'none'; // Hide input while new text is revealed
+          updateText();
         });
         suggestions.appendChild(li);
       });
@@ -62,11 +71,16 @@ document.addEventListener('DOMContentLoaded', () => {
   userInput.addEventListener('keypress', function(e) {
     if (e.key === 'Enter') {
       e.preventDefault();
-      let match = suggestionList.find(item => item.toLowerCase().includes(this.value.toLowerCase()));
+      // Look for exact matches first, then partial matches
+      let match = suggestionList.find(item => 
+        item.toLowerCase() === this.value.toLowerCase() || 
+        item.toLowerCase().startsWith(this.value.toLowerCase())
+      );
+
       if (match) {
         i = 0;
         revealText = '';
-        currentText = suggestionText[match];
+        currentText = suggestionText[match](isMobile()); // Use the function call with isMobile()
         text.textContent = '';
         inputContainer.style.display = 'none'; // Hide input while new text is revealed
         updateText();
