@@ -6,14 +6,14 @@ body {
   padding: 0;
   height: 100vh;
   display: flex;
-  flex-direction: column; /* This ensures content is placed vertically */
+  flex-direction: column;
 }
 
 #terminal {
   flex: 1;
   display: flex;
   flex-direction: column;
-  position: relative; /* Needed for the background effect */
+  position: relative;
   overflow-y: auto; /* Enable vertical scrolling for content */
 }
 
@@ -26,9 +26,9 @@ body {
 
 #input-container {
   display: flex;
-  align-items: center; /* Center items vertically */
+  align-items: center;
   height: 30px; /* Reserve space for input */
-  position: absolute; /* Position input at the bottom */
+  position: absolute;
   bottom: 0;
   width: 100%;
   background: rgba(0, 0, 0, 0.7); /* Semi-transparent background for input area */
@@ -44,34 +44,9 @@ body {
   border: none;
   color: #00FF00;
   font-family: 'Courier New', Courier, monospace;
-  width: calc(100% - 60px); /* Adjust width to account for prompt and potential cursor */
+  width: calc(100% - 60px); /* Adjust width to account for prompt */
   outline: none; /* Remove the default focus outline */
   flex: 1; /* Allow input to grow/shrink within its container */
-}
-
-#suggestions {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  max-height: 200px; /* Match with the reserved space in #input-container margin-bottom */
-  overflow-y: auto;
-  position: absolute;
-  width: 100%;
-  bottom: 30px; /* Position above the input */
-  background: rgba(0, 0, 0, 0.7); /* Dark overlay for readability */
-  border-top: 1px solid #00FF00;
-  display: none; /* Hide by default */
-  z-index: 2; /* Above input */
-}
-
-#suggestions li {
-  cursor: pointer;
-  padding: 5px 0;
-  transition: background-color 0.3s;
-}
-
-#suggestions li:hover {
-  background-color: rgba(255, 255, 255, 0.1);
 }
 
 /* For mystic effect */
@@ -83,11 +58,11 @@ body::after {
   right: 0;
   bottom: 0;
   background: repeating-linear-gradient(
-      45deg,
-      rgba(0, 255, 0, 0.1),
-      rgba(0, 255, 0, 0.1) 10px,
-      transparent 10px,
-      transparent 20px
+    45deg,
+    rgba(0, 255, 0, 0.1),
+    rgba(0, 255, 0, 0.1) 10px,
+    transparent 10px,
+    transparent 20px
   );
   z-index: -1;
   animation: mysticGlow 10s infinite alternate;

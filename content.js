@@ -1,7 +1,7 @@
 // Reusable Menu
 const menu = `
   (A)I
-  (W)ebsite
+  (W)ebsites
   (S)oftware
   (M)arketing
   (C)ontact
@@ -64,13 +64,13 @@ const softwareContent = `
    We develop tailored software solutions to meet your specific business needs, enhancing efficiency and productivity.
 
    - API Development & Integrations
-   - Continuous Support and Updates
+   - Scheduling Solutions
+   - Continuous Support
 `;
 
 const marketingContent = `
    We partnered with marketing experts and can provide:
 
-   - Multi-Channel Marketing Strategies
    - Data-Driven Campaigns
    - Branding and Identity Development
    - Analytics and Optimization
