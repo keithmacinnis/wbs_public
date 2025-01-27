@@ -51,12 +51,16 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'Enter' || e.keyCode === 13) {
       e.preventDefault();
       const actualInput = userInput.value.slice(0, userInput.selectionStart);
+      
+
       const match = Object.keys(suggestionText).find(item => 
         item.toLowerCase() === actualInput.toLowerCase() || 
         item.toLowerCase().startsWith(actualInput.toLowerCase())
       );
-
       if (match) {
+        if (match==="Exit"){
+          handleExit()
+        }
         i = 0;
         revealText = '';
         currentText = suggestionText[match](isMobile());
@@ -69,6 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
         inputContainer.style.display = 'flex';
         userInput.focus();
       }
+      
       userInput.value = '';
       userInput.style.color = '#00FF00';
     }
@@ -79,6 +84,15 @@ document.addEventListener('DOMContentLoaded', () => {
       userInput.value = '';
       userInput.style.color = '#00FF00';
       e.preventDefault();
+    }
+  }
+
+  function handleExit() {
+    // Go back in browser history
+    if (window.history.length > 1) {
+      window.history.back();
+    } else {
+      console.log("No history to navigate");
     }
   }
 

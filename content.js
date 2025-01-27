@@ -5,6 +5,8 @@ const menu = `
   (S)oftware
   (M)arketing
   (C)ontact
+  -
+  (e)xit
 `;
 
 // Reusable Headers
@@ -97,4 +99,5 @@ const suggestionText = {
     "Software": (isMobile) => `${isMobile ? mobileHeader : fullHeader}${softwareContent}${isMobile ? mobileFooter : fullFooter}`,
     "Marketing": (isMobile) => `${isMobile ? mobileHeader : fullHeader}${marketingContent}${isMobile ? mobileFooter : fullFooter}`,
     "Contact": (isMobile) => `${isMobile ? mobileHeader : fullHeader}${contactContent}${isMobile ? mobileFooter : fullFooter}`,
+    "Exit": ()=>``
 };
