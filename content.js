@@ -30,6 +30,10 @@ const mobileFooter = `\n\n${menu}`;
 // Main content for each section
 const homeContentMobile = `
 Welcome to Whistler Business Solutions!
+
+Please enjoy our retro interface.
+  
+Enter the first character of a menu item, and hit enter to navigate.
 `;
 const homeContent = `
       x                                                                 
@@ -50,6 +54,9 @@ const homeContent = `
 
                     Welcome to Whistler Business Solutions!
 
+  Please enjoy our retro interface!
+  
+  Enter the first character of a menu item, and hit enter to navigate.
 
 `;
 const websiteContent = `
