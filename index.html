@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="Whistler Business Solutions - Interactive ASCII Terminal">
     <title>Whistler Business Solutions</title>
     <link rel="stylesheet" href="styles.css">
-  </head>
-  <body>
+</head>
+<body>
     <div id="terminal">
-      <pre id="ascii-text"></pre>
-      <div id="input-container" style="display: none;">
-        <div id="prompt">com.wbs@user$</div>
-        <input id="user-input" type="text" aria-label="Command input" autofocus>
-      </div>
+        <pre id="ascii-text"></pre>
+        <div id="input-container" style="display: none;">
+            <div id="prompt">com.wbs@user$</div>
+            <input id="user-input" type="text" aria-label="Command input" autofocus>
+        </div>
     </div>
+    <audio id="typeSound" src="keyclick.mp3" preload="auto"></audio>
+
     <script src="content.js"></script>
     <script src="script.js"></script>  
-  </body>
+</body>
 </html>

@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const text = document.getElementById('ascii-text');
   const userInput = document.getElementById('user-input');
   const inputContainer = document.getElementById('input-container');
+  const typeSound = document.getElementById('typeSound');
 
   let i = 0;
   let revealText = '';
@@ -15,7 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
       if (i >= currentText.split('\n').length) {
         inputContainer.style.display = 'flex';
         userInput.focus();
-        // Scroll text to bottom
         text.scrollTop = text.scrollHeight;
       } else {
         setTimeout(updateText, 50);
@@ -45,31 +45,30 @@ document.addEventListener('DOMContentLoaded', () => {
   function handleInput() {
     const value = userInput.value;
     suggestAutofill(value);
+    if (value.length > 0) {
+      typeSound.currentTime = 0;
+      typeSound.play();
+    }
   }
 
   function handleEnter(e) {
     if (e.key === 'Enter' || e.keyCode === 13) {
       e.preventDefault();
       const actualInput = userInput.value.slice(0, userInput.selectionStart);
-      
 
       const match = Object.keys(suggestionText).find(item => 
         item.toLowerCase() === actualInput.toLowerCase() || 
         item.toLowerCase().startsWith(actualInput.toLowerCase())
       );
       if (match) {
-        if (match==="Exit"){
-          handleExit()
-        }
+        if (match === "Exit") handleExit();
         i = 0;
         revealText = '';
         currentText = suggestionText[match](isMobile());
         text.textContent = '';
-        // Keep input hidden until text is fully revealed
         updateText();
       } else {
         text.textContent += `\nNo match found for: "${actualInput}"`;
-        // Show input immediately if no match
         inputContainer.style.display = 'flex';
         userInput.focus();
       }
@@ -88,7 +87,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function handleExit() {
-    // Go back in browser history
     if (window.history.length > 1) {
       window.history.back();
     } else {
@@ -99,11 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
   updateText();
 
   window.addEventListener('resize', () => {
-    if (isMobile()) {
-      currentText = suggestionText["Home"](true);
-    } else {
-      currentText = suggestionText["Home"](false);
-    }
+    currentText = suggestionText["Home"](isMobile());
     i = 0;
     revealText = '';
     text.textContent = '';
@@ -120,12 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Prevent scrolling when keyboard appears
   window.addEventListener('resize', () => {
-    if (window.innerHeight < 500) { // Rough estimate for keyboard being open
-      document.body.style.height = `${window.innerHeight}px`;
-    } else {
-      document.body.style.height = '100vh';
-    }
+    document.body.style.height = window.innerHeight < 500 ? `${window.innerHeight}px` : '100vh';
   });
 });

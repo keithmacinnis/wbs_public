@@ -1,6 +1,12 @@
+:root {
+  --bg-color: black;
+  --text-color: #00FF00;
+  --overlay-color: rgba(0, 255, 0, 0.1);
+}
+
 body {
-  background-color: black;
-  color: #00FF00;
+  background-color: var(--bg-color);
+  color: var(--text-color);
   font-family: 'Courier New', Courier, monospace;
   margin: 0;
   padding: 0;
@@ -44,7 +50,7 @@ body {
 #user-input {
   background: transparent;
   border: none;
-  color: #00FF00;
+  color: var(--text-color);
   font-family: 'Courier New', Courier, monospace;
   width: calc(100% - 60px);
   outline: none;
@@ -56,6 +62,7 @@ body {
     padding-top: 30px; /* Space for input at the top for mobile */
     padding-bottom: 0; /* No padding at bottom for mobile */
   }
+  
   #input-container {
     top: 0; /* Move input to top on mobile */
     bottom: auto; /* Reset bottom positioning */
@@ -72,8 +79,8 @@ body::after {
   bottom: 0;
   background: repeating-linear-gradient(
     45deg,
-    rgba(0, 255, 0, 0.1),
-    rgba(0, 255, 0, 0.1) 10px,
+    var(--overlay-color),
+    var(--overlay-color) 10px,
     transparent 10px,
     transparent 20px
   );
