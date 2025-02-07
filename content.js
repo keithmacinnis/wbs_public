@@ -3,8 +3,8 @@ const menu = `
   AI
   Websites
   Software
-  Marketing
-  Contact
+
+  contact
   -
   exit
 `;
@@ -24,8 +24,8 @@ const mobileHeader = `
 `;
 
 // Reusable Footers
-const fullFooter = `\n\n${menu}`;
-const mobileFooter = `\n\n${menu}`;
+const fullFooter = `\n\nMenu\n${menu}`;
+const mobileFooter = `\\nMenu\n${menu}`;
 
 // Main content for each section
 const homeContentMobile = `
@@ -87,18 +87,16 @@ const aiContent = `
    - Strategic Digital Planning
 `;
 const contactContent = `
-   Keith MacInnis - Founder
+   Keith MacInnis - founder
    -
    keith@whistlerBusinessSolutions.com
 `;
 
-// Now define the suggestionText object with dynamic header and footer based on screen size
 const suggestionText = {
   "Home": (isMobile) => `${isMobile ? mobileHeader : ''}${isMobile ? homeContentMobile : homeContent}${isMobile ? mobileFooter : fullFooter}`,
   "AI": (isMobile) => `${isMobile ? mobileHeader : fullHeader}${aiContent}${isMobile ? mobileFooter : fullFooter}`,
   "Website": (isMobile) => `${isMobile ? mobileHeader : fullHeader}${websiteContent}${isMobile ? mobileFooter : fullFooter}`,
   "Software": (isMobile) => `${isMobile ? mobileHeader : fullHeader}${softwareContent}${isMobile ? mobileFooter : fullFooter}`,
-  "Marketing": (isMobile) => `${isMobile ? mobileHeader : fullHeader}${marketingContent}${isMobile ? mobileFooter : fullFooter}`,
   "Contact": (isMobile) => `${isMobile ? mobileHeader : fullHeader}${contactContent}${isMobile ? mobileFooter : fullFooter}`,
   "Exit": () => ``
 };
